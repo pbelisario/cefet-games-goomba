@@ -24,6 +24,11 @@ public class Game extends ApplicationAdapter {
 
     private SpriteBatch batch;
     private Texture[] mapLevelsTextures;
+    private Texture spriteSheet;
+    private Goomba player;
+    
+    
+    
     
     /**
      * No método create colocamos código de inicialização do jogo. Por exemplo,
@@ -36,6 +41,11 @@ public class Game extends ApplicationAdapter {
         batch = new SpriteBatch();
         mapLevelsTextures = new Texture[2];
         mapLevelsTextures[0] = new Texture("map-level-1.png");
+        mapLevelsTextures[1] = new Texture("map-level-2.png");
+        spriteSheet = new Texture("goomba-spritesheet.png");
+        player = new Goomba (spriteSheet);
+        
+        
 
         
         // cor de fundo da tela: branco
@@ -52,6 +62,7 @@ public class Game extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
     }
+    
 
     /**
      * No método render desenhamos tudo o que faz parte da cena do jogo. É aqui
@@ -72,6 +83,9 @@ public class Game extends ApplicationAdapter {
         batch.begin();        
             // desenhos são realizados aqui
             batch.draw(mapLevelsTextures[0], 0, 0);
+            player.render(batch);
+            batch.draw(mapLevelsTextures[1], 0, 0);
+            
 
         batch.end();
     }
@@ -90,7 +104,6 @@ public class Game extends ApplicationAdapter {
         if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
             Gdx.app.exit();
         }
-
         // ...
     }
     
